@@ -193,12 +193,12 @@
             max-width: 800px; /* Ограничение ширины для лучшего центрирования */
             transition: padding var(--transition-speed);
             scroll-margin-top: calc(var(--header-height) + 20px); /* Предотвращает перекрытие при якорных ссылках */
-            /* Удалены свойства flexbox, чтобы избежать ограничения высоты */
-            /* display: flex;
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 20px; */
+            gap: 20px;
+            /* Удален margin-top: 7%; */
         }
         
         #hero h1 {
@@ -637,7 +637,8 @@
             const burger = document.querySelector('.burger');
             const navLinks = document.querySelector('.nav-links');
 
-            burger.addEventListener('click', () => {
+            burger.addEventListener('click', (e) => {
+                e.stopPropagation(); // Предотвращает распространение события клика
                 burger.classList.toggle('active');
                 navLinks.classList.toggle('active');
             });
