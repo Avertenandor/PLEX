@@ -109,6 +109,7 @@
             display: flex;
             gap: 20px;
             flex-wrap: wrap; /* Позволяет кнопкам переноситься на новые строки */
+            justify-content: center; /* Центрирование навигационных ссылок */
         }
         
         /* Бургер-меню (скрыто по умолчанию) */
@@ -519,6 +520,7 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
                 padding: 20px;
+                justify-items: center;
             }
             
             .burger.active div:nth-child(1) {
