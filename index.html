@@ -1,579 +1,1085 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="DynSteaking — Честный путь к прибыли. Управляйте криптовалютой, обеспечивайте пассивный доход...">
-  <meta name="keywords" content="DynSteaking, пассивный доход, доход без вложений, копилка, денежная машина...">
-  <meta name="robots" content="index, follow">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="DynSteaking — Честный путь к прибыли">
-  <meta property="og:description" content="Управляйте криптовалютой, обеспечивайте пассивный доход...">
-  <meta property="og:image" content="фон/logo.png"><!-- при необходимости исправьте -->
-  <meta property="og:url" content="https://data-plex.net">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="DynSteaking — Честный путь к прибыли">
-  <meta name="twitter:description" content="Управляйте криптовалютой...">
-  <meta name="twitter:image" content="фон/logo.png"><!-- при необходимости исправьте -->
-
-  <title>DynSteaking — Честный путь к прибыли</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- AOS CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <style>
-    /* Сброс прокрутки (чтобы плавный скролл был нативным) */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    :root {
-      --primary-color: #5D4037;      
-      --secondary-color: #8D6E63;    
-      --accent-color: #F5F5F5;       
-      --background-image: url('фон/1.webp');
-      --text-color: #F5F5F5;         
-      --header-background: rgba(93, 64, 55, 0.95);
-      --button-background: #8D6E63;
-      --button-hover: #6D4C41;
-      --link-color: #F5F5F5;         
-      --link-hover-color: #FFFFFF;   
-      --border-radius: 8px;
-      --box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      --max-width: 1200px;
-      --font-family: 'Roboto', sans-serif;
-      --transition-speed: 0.3s;
-      --header-height: 80px; 
-    }
-
-    * {
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box;
-    }
-    body {
-      font-family: var(--font-family);
-      background: var(--background-image) no-repeat center center / cover,
-                  linear-gradient(135deg, #4E342E 0%, #3E2723 100%);
-      color: var(--text-color);
-      line-height: 1.6;
-      overflow-x: hidden;
-      /* Можно добавить fallback background-color, если фон не загрузится */
-    }
-
-    header {
-      position: fixed;
-      top: 0; 
-      left: 0; 
-      right: 0;
-      height: var(--header-height);
-      background: var(--header-background);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px; /* чуть уменьшил */
-      z-index: 1000;
-      box-shadow: var(--box-shadow);
-      transition: background var(--transition-speed), box-shadow var(--transition-speed);
-    }
-    header.scrolled {
-      background: rgba(93,64,55,1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-
-    .logo {
-      width: 140px;
-      height: auto;
-      transition: width var(--transition-speed);
-    }
-
-    nav {
-      position: relative;
-    }
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 15px;
-    }
-    .nav-links a {
-      display: inline-block;
-      padding: 10px 20px;
-      background: var(--button-background);
-      color: var(--link-color);
-      text-decoration: none;
-      font-weight: 700;
-      border-radius: var(--border-radius);
-      transition: background var(--transition-speed), transform var(--transition-speed);
-      white-space: nowrap; /* Чтоб текст не переносился, если нужно перенести - уберите */
-    }
-    .nav-links a:hover {
-      background: var(--button-hover);
-      transform: translateY(-2px);
-      color: var(--link-hover-color);
-    }
-
-    /* Burger */
-    .burger {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 25px;
-      height: 18px;
-      cursor: pointer;
-      margin-left: 15px; /* отступ */
-    }
-    .burger div {
-      width: 100%;
-      height: 3px;
-      background-color: var(--link-color);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-links.active {
-      position: absolute;
-      top: var(--header-height);
-      left: 0; right: 0;
-      flex-direction: column;
-      gap: 10px;
-      background: var(--header-background);
-      padding: 20px 0;
-      box-shadow: var(--box-shadow);
-      border-radius: var(--border-radius);
-      align-items: center;
-    }
-    .nav-links.active a {
-      margin: 5px 0;
-    }
-
-    .burger.active div:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .burger.active div:nth-child(2) {
-      opacity: 0;
-    }
-    .burger.active div:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    #language-switcher {
-      margin-left: 10px;
-    }
-    #language-switcher select {
-      padding: 5px 10px;
-      border: none;
-      border-radius: var(--border-radius);
-      background: var(--secondary-color);
-      color: #FFF;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    #language-switcher select:hover {
-      background: var(--button-hover);
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-
-    main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: calc(var(--header-height) + 20px) 15px 60px 15px;
-    }
-
-    /* Hero */
-    #hero {
-      background: rgba(93,64,55,0.85);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      backdrop-filter: blur(5px);
-      text-align: center;
-      padding: 60px 20px;
-      margin-bottom: 50px;
-      color: var(--link-hover-color);
-    }
-    #hero h1 {
-      font-size: 2.8rem; /* чуть меньше */
-      margin-bottom: 20px;
-    }
-    #hero p {
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-    }
-    #hero .cta-button {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    section {
-      background: rgba(93,64,55,0.8);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      backdrop-filter: blur(10px);
-      padding: 40px;
-      margin-bottom: 50px;
-      color: var(--text-color);
-    }
-    section h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-    }
-    section p {
-      font-size: 1rem;
-      margin-bottom: 15px;
-      text-align: justify;
-    }
-    section ul, section ol {
-      margin-left: 20px;
-      margin-bottom: 20px;
-    }
-
-    #market-embed iframe {
-      width: 100%;
-      height: 500px;
-      border-radius: var(--border-radius);
-      border: none;
-      box-shadow: var(--box-shadow);
-      transition: transform 0.3s;
-    }
-    #market-embed iframe:hover {
-      transform: scale(1.01);
-    }
-
-    /* Comparison */
-    #comparison {
-      /* тот же стиль секций можно оставить */
-    }
-    #comparison h2 { text-align: center; margin-bottom: 20px; }
-    #comparison p { margin-bottom: 15px; }
-
-    /* Footer */
-    footer {
-      background: var(--header-background);
-      color: #F5F5F5;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-    }
-    footer p { margin: 5px 0; }
-    .social-links {
-      display: flex; 
-      justify-content: center; 
-      gap: 15px;
-      margin-top: 10px;
-    }
-
-    /* Адаптивы */
-    @media (max-width: 768px) {
-      .burger { display: flex; }
-      nav ul { display: none; }
-      nav ul.active {
-        display: flex; 
-        /* остальное уже выше */
-      }
-      .logo {
-        width: 100px;
-      }
-      header {
-        padding: 0 15px; /* уже меньше */
-      }
-      #hero h1 {
-        font-size: 2rem;
-      }
-      #hero p {
-        font-size: 1rem;
-      }
-      .button-link {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-      }
-      section {
-        padding: 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .logo {
-        width: 80px;
-      }
-      #hero h1 {
-        font-size: 1.5rem;
-      }
-      #hero p {
-        font-size: 0.9rem;
-      }
-      .button-link {
-        font-size: 0.8rem;
-      }
-      section {
-        background: rgba(93,64,55,0.95);
-        backdrop-filter: none;
-        padding: 15px;
-      }
-    }
-  </style>
-
-  <!-- AOS JS -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    AOS.init({ duration: 800, once: true });
-
-    const burger = document.querySelector('.burger');
-    const navLinks = document.querySelector('.nav-links');
-
-    // Открытие/закрытие бургер-меню
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    // Переключение языков
-    const langSelect = document.querySelector('#language-switcher select');
-    const ruElems = document.querySelectorAll('[data-lang="ru"]');
-    const enElems = document.querySelectorAll('[data-lang="en"]');
-
-    langSelect.addEventListener('change', function(){
-      if(this.value === 'en') {
-        ruElems.forEach(el=>el.style.display='none');
-        enElems.forEach(el=>el.style.display='block');
-      } else {
-        ruElems.forEach(el=>el.style.display='block');
-        enElems.forEach(el=>el.style.display='none');
-      }
-    });
-
-    // Изначально RU
-    langSelect.value = 'ru';
-    enElems.forEach(el=>el.style.display='none');
-
-    // Плавный скролл + активная ссылка
-    const navLinksAll = document.querySelectorAll('nav ul li a.button-link');
-    navLinksAll.forEach(link => {
-      link.addEventListener('click', e => {
-        const href = link.getAttribute('href');
-        if(href.startsWith('#')) {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          const headerHeight = parseInt(getComputedStyle(document.querySelector('header')).height);
-          if(target) {
-            window.scrollTo({
-              top: target.offsetTop - headerHeight - 20,
-              behavior: 'smooth'
-            });
-          }
-          navLinksAll.forEach(l=>l.classList.remove('active'));
-          link.classList.add('active');
-
-          // Закрытие меню
-          if(navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            burger.classList.remove('active');
-          }
+    <meta charset="UTF-8">
+    <!-- Удалён meta http-equiv="Content-Language" -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="DynSteaking — Честный путь к прибыли. Управляйте криптовалютой, обеспечивайте пассивный доход, используйте лучшие реферальные и партнерские программы. Инвестиции 2025 года.">
+    <meta name="keywords" content="DynSteaking, пассивный доход, доход без вложений, копилка, денежная машина, лучшая партнерская программа, лучшая реферальная программа, лучшая сетевая компания, 2025, Plex, Плекс">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="DynSteaking — Честный путь к прибыли">
+    <meta property="og:description" content="Управляйте криптовалютой, обеспечивайте пассивный доход и используйте лучшие реферальные программы с DynSteaking в 2025 году.">
+    <meta property="og:image" content="https://avertenandor.github.io/фон/logo.png">
+    <meta property="og:url" content="https://avertenandor.github.io">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DynSteaking — Честный путь к прибыли">
+    <meta name="twitter:description" content="Управляйте криптовалютой, обеспечивайте пассивный доход и используйте лучшие реферальные программы с DynSteaking в 2025 году.">
+    <meta name="twitter:image" content="https://avertenandor.github.io/фон/logo.png">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "DynSteaking — Честный путь к прибыли",
+            "url": "https://avertenandor.github.io",
+            "description": "DynSteaking — платформа для управления криптовалютой, обеспечения пассивного дохода и использования лучших реферальных программ в 2025 году.",
+            "publisher": {
+                "@type": "Organization",
+                "name": "DynSteaking",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://avertenandor.github.io/фон/logo.png"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://avertenandor.github.io"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "График рынка",
+                        "item": "https://avertenandor.github.io#market-embed"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Как это работает",
+                        "item": "https://avertenandor.github.io#how-it-works"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Почему выгодно",
+                        "item": "https://avertenandor.github.io#advantages"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": "Почему перспективно",
+                        "item": "https://avertenandor.github.io#perspective"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 5,
+                        "name": "Чем мы лучше",
+                        "item": "https://avertenandor.github.io#comparison"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 6,
+                        "name": "Партнерство",
+                        "item": "https://avertenandor.github.io#partnership"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 7,
+                        "name": "О нас",
+                        "item": "https://avertenandor.github.io#about-us"
+                    }
+                ]
+            }
         }
-      });
-    });
+    </script>
+    
+    <title>DynSteaking — Честный путь к прибыли</title>
+    
+    <!-- Favicon и иконки -->
+    <link rel="apple-touch-icon" sizes="180x180" href="фон/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="фон/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="фон/favicon-16x16.png">
+    <link rel="manifest" href="фон/site.webmanifest">
+    
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://avertenandor.github.io">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" href="https://avertenandor.github.io" hreflang="ru">
+    <link rel="alternate" href="https://avertenandor.github.io/en" hreflang="en">
+    <!-- Добавьте другие языки по необходимости -->
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Library CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    <!-- CSS Styles -->
+    <style>
+        :root {
+            /* Основные цвета */
+            --primary-color: #5D4037;      /* Коричневый */
+            --secondary-color: #8D6E63;    /* Светло-коричневый */
+            --accent-color: #F5F5F5;       /* Светлый текст */
+            --background-image: url('фон/1.webp');
+            --text-color: #F5F5F5;         /* Светлый текст для читаемости на темном фоне */
+            --header-background: rgba(93, 64, 55, 0.95);
+            --button-background: #8D6E63;
+            --button-hover: #6D4C41;
+            --link-color: #F5F5F5;         /* Цвет текста на кнопках */
+            --link-hover-color: #FFFFFF;   /* Цвет текста на кнопках при наведении */
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --max-width: 1200px;
+            --font-family: 'Roboto', sans-serif;
+            --transition-speed: 0.3s;
+            --header-height: 80px; /* Установленная высота хедера */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background: var(--background-image), linear-gradient(135deg, #4E342E 0%, #3E2723 100%);
+            background-size: cover;
+            background-position: center;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: var(--header-background);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: var(--box-shadow);
+            transition: background var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        
+        header.scrolled {
+            background: rgba(93, 64, 55, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            width: 150px;
+            height: auto;
+            transition: width var(--transition-speed);
+        }
+        
+        nav {
+            position: relative;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap; /* Позволяет кнопкам переноситься на новые строки */
+        }
+        
+        /* Бургер-меню (скрыто по умолчанию) */
+        .burger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 100%;
+            height: 3px;
+            background-color: var(--link-color);
+            transition: all var(--transition-speed) ease;
+        }
+        
+        /* Скрытые навигационные ссылки для мобильных */
+        .nav-links {
+            display: flex;
+        }
+        
+        .nav-links.active {
+            display: flex;
+            position: absolute;
+            top: var(--header-height); /* Соответствует высоте хедера */
+            left: 0;
+            right: 0;
+            background: var(--header-background);
+            padding: 20px 0;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+        
+        .nav-links a {
+            margin: 10px 0;
+            white-space: nowrap; /* Предотвращает перенос слов */
+            max-width: 90%; /* Ограничение ширины для предотвращения выезда за экран */
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Унифицированный стиль кнопок */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--button-background);
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: var(--border-radius);
+            transition: background var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-align: center; /* Центрирование текста внутри кнопки */
+        }
+        
+        .button-link:hover, .button-link.active {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            color: var(--link-hover-color);
+        }
+        
+        #language-switcher select {
+            padding: 6px 10px;
+            border: none;
+            border-radius: var(--border-radius);
+            background: var(--secondary-color);
+            color: #FFFFFF;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        #language-switcher select:hover {
+            background: var(--button-hover);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        main {
+            padding: calc(var(--header-height) + 20px) 20px 60px 20px; /* Отступ сверху с учётом высоты хедера */
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрирование содержимого */
+        }
+        
+        /* Секция Герой */
+        #hero {
+            background: rgba(93, 64, 55, 0.85);
+            padding: 60px 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            color: #FFFFFF;
+            margin-bottom: 60px;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(5px);
+            width: 100%;
+            max-width: 800px; /* Ограничение ширины для лучшего центрирования */
+            transition: padding var(--transition-speed);
+            scroll-margin-top: calc(var(--header-height) + 20px); /* Предотвращает перекрытие при якорных ссылках */
+        }
+        
+        #hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            transition: font-size var(--transition-speed);
+        }
+        
+        #hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: font-size var(--transition-speed);
+        }
+        
+        /* Анимация пульсации для кнопки в секции Герой */
+        #hero .cta-button {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Секции контента */
+        section {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(93, 64, 55, 0.8);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 800px; /* Ограничение ширины для лучшего центрирования */
+            transition: padding var(--transition-speed), background var(--transition-speed), backdrop-filter var(--transition-speed);
+            scroll-margin-top: calc(var(--header-height) + 20px); /* Предотвращает перекрытие при якорных ссылках */
+        }
+        
+        section h1, section h2 {
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: font-size var(--transition-speed);
+        }
+        
+        section h1 {
+            font-size: 2.5em;
+        }
+        
+        section h2 {
+            font-size: 2em;
+        }
+        
+        section p {
+            color: #F5F5F5;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-align: justify;
+            transition: font-size var(--transition-speed);
+        }
+        
+        section ul, section ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+        }
+        
+        section ul li, section ol li {
+            margin-bottom: 10px;
+            color: #F5F5F5;
+            font-size: 1.1em;
+        }
+        
+        /* Встраивание графика рынка */
+        #market-embed {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        #market-embed iframe {
+            width: 100%;
+            max-width: 100%; /* Обеспечивает, что iframe не выходит за пределы контейнера */
+            height: 500px;
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: transform var(--transition-speed);
+        }
+        
+        #market-embed iframe:hover {
+            transform: scale(1.02);
+        }
+        
+        #market-embed .button-link {
+            margin-top: 20px;
+            max-width: 300px; /* Ограничение ширины для предотвращения выезда за экран */
+            word-wrap: break-word; /* Позволяет переносить длинные слова */
+        }
+        
+        /* Секция Партнерство */
+        #partnership {
+            background: rgba(93, 64, 55, 0.8);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 800px; /* Ограничение ширины для лучшего центрирования */
+            transition: padding var(--transition-speed), background var(--transition-speed), backdrop-filter var(--transition-speed);
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
+        
+        #partnership h2 {
+            text-align: center;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            transition: font-size var(--transition-speed);
+        }
+        
+        .partnership-subsection {
+            margin-bottom: 30px;
+        }
+        
+        .partnership-subsection h3 {
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            text-align: center;
+            transition: font-size var(--transition-speed);
+        }
+        
+        .partnership-subsection p {
+            color: #F5F5F5;
+            font-size: 1.1em;
+            text-align: center; /* Центрирование */
+            margin-bottom: 10px;
+            transition: font-size var(--transition-speed);
+        }
+        
+        .partnership-subsection a.button-link {
+            margin-top: 10px;
+            display: inline-block;
+            max-width: 300px; /* Ограничение ширины */
+            word-wrap: break-word;
+        }
+        
+        /* Секция Полезных Ссылок */
+        #useful-links {
+            background: rgba(93, 64, 55, 0.8);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 800px; /* Ограничение ширины для лучшего центрирования */
+            transition: padding var(--transition-speed), background var(--transition-speed), backdrop-filter var(--transition-speed);
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
+        
+        #useful-links h2 {
+            text-align: center;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            transition: font-size var(--transition-speed);
+        }
+        
+        #useful-links .useful-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            transition: gap var(--transition-speed);
+        }
+        
+        #useful-links .useful-links a.button-link {
+            /* Стиль уже унаследован от .button-link */
+            max-width: 300px; /* Ограничение ширины */
+            word-wrap: break-word; /* Позволяет переносить длинные слова */
+        }
+        
+        /* Секция Чем мы лучше */
+        #comparison {
+            background: rgba(93, 64, 55, 0.8);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 800px; /* Ограничение ширины для лучшего центрирования */
+            transition: padding var(--transition-speed), background var(--transition-speed), backdrop-filter var(--transition-speed);
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
+        
+        #comparison h2 {
+            text-align: center;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            transition: font-size var(--transition-speed);
+        }
+        
+        #comparison p {
+            color: #F5F5F5;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-align: justify;
+            transition: font-size var(--transition-speed);
+        }
+        
+        #comparison ul {
+            list-style: disc;
+            margin-left: 20px;
+            color: #F5F5F5;
+            transition: font-size var(--transition-speed);
+        }
+        
+        /* Новый раздел "О нас" */
+        #about-us {
+            background: rgba(93, 64, 55, 0.8);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 800px; /* Ограничение ширины для лучшего центрирования */
+            transition: padding var(--transition-speed), background var(--transition-speed), backdrop-filter var(--transition-speed);
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
+        
+        #about-us h2 {
+            text-align: center;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            transition: font-size var(--transition-speed);
+        }
+        
+        #about-us p {
+            color: #F5F5F5;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-align: justify;
+            transition: font-size var(--transition-speed);
+        }
+        
+        /* Footer */
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: var(--header-background);
+            color: #F5F5F5;
+            font-size: 0.9em;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 60px auto 0 auto; /* Центрирование футера */
+            transition: padding var(--transition-speed), background var(--transition-speed);
+        }
+        
+        footer p {
+            text-align: center;
+            margin: 5px 0;
+        }
+        
+        footer a.button-link {
+            display: inline-block;
+            margin: 5px;
+            max-width: 300px; /* Ограничение ширины */
+            word-wrap: break-word; /* Позволяет переносить длинные слова */
+        }
+        
+        footer a.button-link:hover {
+            /* Стиль уже унаследован от .button-link:hover */
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px; /* Поднято выше */
+            transition: gap var(--transition-speed);
+        }
+        
+        .social-links a.button-link {
+            /* Стиль уже унаследован от .button-link */
+            max-width: 150px; /* Ограничение ширины */
+            word-wrap: break-word;
+        }
+        
+        .social-links a.button-link:hover {
+            /* Стиль уже унаследован от .button-link:hover */
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            /* Перенос точки переключения бургер-меню на 992px */
+            .burger {
+                display: flex;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+            }
+            
+            nav ul.active {
+                display: flex;
+                position: absolute;
+                top: var(--header-height); /* Соответствует высоте хедера */
+                left: 0;
+                right: 0;
+                background: var(--header-background);
+                padding: 20px 0;
+                flex-direction: column;
+                align-items: center;
+                box-shadow: var(--box-shadow);
+                border-radius: var(--border-radius);
+            }
+            
+            .burger.active div:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .burger.active div:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .burger.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            
+            /* Уменьшение шрифтов в Hero */
+            #hero h1 {
+                font-size: 2em;
+            }
+            
+            #hero p {
+                font-size: 1em;
+            }
+            
+            /* Уменьшение отступов в main */
+            main {
+                padding: calc(var(--header-height) + 10px) 20px 40px 20px;
+            }
+            
+            /* Уменьшение логотипа */
+            .logo {
+                width: 100px;
+            }
+            
+            /* Уменьшение отступов и размеров кнопок */
+            .button-link {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+            
+            /* Центрирование партнерских подразделений */
+            .partnership-subsection p {
+                text-align: center;
+            }
+            
+            /* Уменьшение шрифтов в секциях */
+            section h1 {
+                font-size: 2em;
+            }
+            
+            section h2 {
+                font-size: 1.5em;
+            }
+            
+            section p, section ul li, section ol li {
+                font-size: 1em;
+            }
+            
+            /* Уменьшение padding секций */
+            section {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Дополнительные изменения для очень узких экранов */
+            .logo {
+                width: 70px;
+            }
+            
+            /* Реализация бургер-меню */
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            /* Уменьшение шрифтов еще больше */
+            #hero h1 {
+                font-size: 1.3em;
+            }
+            
+            #hero p {
+                font-size: 0.8em;
+            }
+            
+            .button-link {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+            
+            /* Фоновые секции: уменьшение прозрачности или убирание blur */
+            section {
+                background: rgba(93, 64, 55, 0.95); /* Увеличение непрозрачности */
+                backdrop-filter: none; /* Убираем blur */
+            }
+        }
+        
+        /* Prevent horizontal overflow */
+        body, html {
+            width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+    
+    <!-- AOS Library JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <!-- JavaScript для бургер-меню и других интерактивных элементов -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
 
-    // Scroll header
-    window.addEventListener('scroll', ()=>{
-      const headerEl = document.querySelector('header');
-      if(window.scrollY > 100) {
-        headerEl.classList.add('scrolled');
-      } else {
-        headerEl.classList.remove('scrolled');
-      }
-    });
-  });
-  </script>
+            // Language Switcher
+            const languageSwitcher = document.getElementById('language-switcher').querySelector('select');
+            const elementsRu = document.querySelectorAll('[data-lang="ru"]');
+            const elementsEn = document.querySelectorAll('[data-lang="en"]');
+
+            languageSwitcher.addEventListener('change', function() {
+                if (this.value === 'en') {
+                    elementsRu.forEach(el => el.style.display = 'none');
+                    elementsEn.forEach(el => el.style.display = 'block');
+                } else {
+                    elementsRu.forEach(el => el.style.display = 'block');
+                    elementsEn.forEach(el => el.style.display = 'none');
+                }
+            });
+
+            // Initialize to Russian
+            languageSwitcher.value = 'ru';
+            elementsEn.forEach(el => el.style.display = 'none');
+
+            // Бургер-меню
+            const burger = document.querySelector('.burger');
+            const navLinks = document.querySelector('.nav-links');
+
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Собираем все кнопки с классом button-link в навигации, футере, разделе "market-embed", "useful-links", "partnership", "comparison" и "about-us"
+            const links = document.querySelectorAll('nav ul li a.button-link, footer a.button-link, #market-embed .button-link, #useful-links .button-link, #partnership .button-link, #comparison .button-link, #about-us .button-link');
+
+            for (const link of links) {
+                link.addEventListener('click', function(e) {
+                    // Если ссылка ведет на якорь, плавно прокручиваем
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const target = document.getElementById(targetId);
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - parseInt(getComputedStyle(document.querySelector('header')).height) - 20, // Отступ для фиксированного хедера
+                                behavior: 'smooth'
+                            });
+                            // Установка активного класса
+                            links.forEach(l => l.classList.remove('active'));
+                            this.classList.add('active');
+                        }
+                        // Закрытие бургер-меню после выбора
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            burger.classList.remove('active');
+                        }
+                    }
+                });
+            }
+
+            // Отслеживание прокрутки для изменения активной ссылки
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('main section');
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - parseInt(getComputedStyle(document.querySelector('header')).height) - 30;
+                    if (pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                links.forEach(link => {
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+
+                // Sticky Header Background Change on Scroll
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            /*
+            // Форма обратной связи: подтверждение отправки
+            const contactForm = document.querySelector('#contact-form form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                contactForm.reset();
+            });
+            */
+        });
+    </script>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <img src="фон/3.png" alt="DynSteaking Logo" class="logo">
-    <nav>
-      <div class="burger" aria-label="Меню" tabindex="0">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#market-embed" class="button-link" data-lang="ru">График рынка</a></li>
-        <li><a href="#market-embed" class="button-link" data-lang="en">Market Chart</a></li>
-        <li><a href="#how-it-works" class="button-link" data-lang="ru">Как это работает</a></li>
-        <li><a href="#how-it-works" class="button-link" data-lang="en">How it works</a></li>
-        <li><a href="#advantages" class="button-link" data-lang="ru">Почему выгодно</a></li>
-        <li><a href="#advantages" class="button-link" data-lang="en">Why It's Beneficial</a></li>
-        <li><a href="#perspective" class="button-link" data-lang="ru">Почему перспективно</a></li>
-        <li><a href="#perspective" class="button-link" data-lang="en">Why It's Promising</a></li>
-        <li><a href="#comparison" class="button-link" data-lang="ru">Чем мы лучше</a></li>
-        <li><a href="#comparison" class="button-link" data-lang="en">Why We're Better</a></li>
-        <li><a href="#partnership" class="button-link" data-lang="ru">Партнерство</a></li>
-        <li><a href="#partnership" class="button-link" data-lang="en">Partnership</a></li>
-        <li><a href="#about-us" class="button-link" data-lang="ru">О нас</a></li>
-        <li><a href="#about-us" class="button-link" data-lang="en">About Us</a></li>
-      </ul>
-    </nav>
-    <div id="language-switcher">
-      <select>
-        <option value="ru" selected>Русский</option>
-        <option value="en">English</option>
-      </select>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section id="hero" data-aos="fade-up">
-    <h1 data-lang="ru">Добро пожаловать в DynSteaking</h1>
-    <h1 data-lang="en" style="display:none;">Welcome to DynSteaking</h1>
-
-    <p data-lang="ru">
-      Мы сделали пассивный доход и доход без вложений, иначе говоря, что-то вроде...
-    </p>
-    <p data-lang="en" style="display:none;">
-      We have created passive income and income without investments, in other words...
-    </p>
-    <p data-lang="ru">
-      Честность, открытость, доброта и огромный ежедневный доход — вот залог нашего успеха.
-    </p>
-    <p data-lang="en" style="display:none;">
-      Honesty, openness, kindness, and substantial daily income are the keys to our success.
-    </p>
-
-    <a href="#market-embed" class="button-link cta-button" data-lang="ru">Узнать больше</a>
-    <a href="#market-embed" class="button-link cta-button" data-lang="en" style="display:none;">Learn More</a>
-  </section>
-
-  <main>
-    <!-- График рынка -->
-    <section id="market-embed" data-aos="fade-up">
-      <h2 data-lang="ru">График рынка PLEX</h2>
-      <h2 data-lang="en" style="display:none;">PLEX Market Chart</h2>
-      <iframe src="https://www.geckoterminal.com/bsc/pools/..." allowfullscreen></iframe>
-
-      <a href="https://pancakeswap.finance/swap?outputCurrency=..." class="button-link" data-lang="ru">Купить PLEX</a>
-      <a href="https://pancakeswap.finance/swap?outputCurrency=..." class="button-link" data-lang="en" style="display:none;">Buy PLEX</a>
+    <!-- Header -->
+    <header>
+        <img src="фон/3.png" alt="DynSteaking Logo" class="logo">
+        <nav aria-label="Основная навигация">
+            <!-- Бургер-меню -->
+            <div class="burger" aria-label="Меню навигации" role="button" tabindex="0">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <!-- Навигационные ссылки -->
+            <ul class="nav-links">
+                <li><a href="#market-embed" class="button-link" data-lang="ru">График рынка</a></li>
+                <li><a href="#market-embed" class="button-link" data-lang="en">Market Chart</a></li>
+                <li><a href="#how-it-works" class="button-link" data-lang="ru">Как это работает</a></li>
+                <li><a href="#how-it-works" class="button-link" data-lang="en">How It Works</a></li>
+                <li><a href="#advantages" class="button-link" data-lang="ru">Почему выгодно</a></li>
+                <li><a href="#advantages" class="button-link" data-lang="en">Why It's Beneficial</a></li>
+                <li><a href="#perspective" class="button-link" data-lang="ru">Почему перспективно</a></li>
+                <li><a href="#perspective" class="button-link" data-lang="en">Why It's Promising</a></li>
+                <li><a href="#comparison" class="button-link" data-lang="ru">Чем мы лучше</a></li>
+                <li><a href="#comparison" class="button-link" data-lang="en">Why We're Better</a></li>
+                <li><a href="#partnership" class="button-link" data-lang="ru">Партнерство</a></li>
+                <li><a href="#partnership" class="button-link" data-lang="en">Partnership</a></li>
+                <li><a href="#about-us" class="button-link" data-lang="ru">О нас</a></li>
+                <li><a href="#about-us" class="button-link" data-lang="en">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="language-switcher">
+            <select aria-label="Выберите язык">
+                <option value="ru" selected>Русский</option>
+                <option value="en">English</option>
+                <!-- Добавьте другие языки по необходимости -->
+            </select>
+        </div>
+    </header>
+    
+    <!-- Герой -->
+    <section id="hero" data-aos="fade-up">
+        <h1 data-lang="ru">Добро пожаловать в DynSteaking</h1>
+        <h1 data-lang="en" style="display: none;">Welcome to DynSteaking</h1>
+        <p data-lang="ru">Мы сделали пассивный доход и доход без вложений, иначе говоря, что-то вроде копилки или денежной машины прямо внутри кошелька каждого пользователя.</p>
+        <p data-lang="en" style="display: none;">We have created passive income and income without investments, in other words, something like a piggy bank or money machine directly inside each user's wallet.</p>
+        <p data-lang="ru">Честность, открытость, доброта и огромный ежедневный доход — вот залог нашего успеха.</p>
+        <p data-lang="en" style="display: none;">Honesty, openness, kindness, and substantial daily income are the keys to our success.</p>
+        <a href="#market-embed" class="button-link cta-button" data-lang="ru">Узнать больше</a>
+        <a href="#market-embed" class="button-link cta-button" data-lang="en" style="display: none;">Learn More</a>
     </section>
-
-    <!-- Как это работает -->
-    <section id="how-it-works" data-aos="fade-up">
-      <h2 data-lang="ru">Как это работает?</h2>
-      <h2 data-lang="en" style="display:none;">How It Works</h2>
-      <p data-lang="ru">
-        (Тут ваш текст на русском)
-      </p>
-      <p data-lang="en" style="display:none;">
-        (Тут текст на английском)
-      </p>
-      <!-- ... прочие абзацы ... -->
-      <a href="#advantages" class="button-link" data-lang="ru">Купить PLEX</a>
-      <a href="#advantages" class="button-link" data-lang="en" style="display:none;">Buy PLEX</a>
-    </section>
-
-    <!-- Безопасно -->
-    <section id="safety" data-aos="fade-up">
-      <h2 data-lang="ru">Почему это безопасно?</h2>
-      <h2 data-lang="en" style="display:none;">Why is it safe?</h2>
-      <ol>
-        <!-- <li data-lang="ru"> ... </li> и т.д. -->
-      </ol>
-      <a href="https://bscscan.com/..." class="button-link" data-lang="ru">Подробнее на BSCScan</a>
-      <a href="https://bscscan.com/..." class="button-link" data-lang="en" style="display:none;">More on BSCScan</a>
-    </section>
-
-    <!-- Почему выгодно -->
-    <section id="advantages" data-aos="fade-up">
-      <h2 data-lang="ru">Почему это выгодно?</h2>
-      <h2 data-lang="en" style="display:none;">Why It's Beneficial</h2>
-      <!-- ... -->
-      <a href="#perspective" class="button-link" data-lang="ru">Купить PLEX</a>
-      <a href="#perspective" class="button-link" data-lang="en" style="display:none;">Buy PLEX</a>
-    </section>
-
-    <!-- Почему перспективно -->
-    <section id="perspective" data-aos="fade-up">
-      <h2 data-lang="ru">Почему это перспективно?</h2>
-      <h2 data-lang="en" style="display:none;">Why It's Promising</h2>
-      <!-- ... -->
-      <a href="#how-it-works" class="button-link" data-lang="ru">Купить PLEX</a>
-      <a href="#how-it-works" class="button-link" data-lang="en" style="display:none;">Buy PLEX</a>
-    </section>
-
-    <!-- Чем мы лучше -->
-    <section id="comparison" data-aos="fade-up">
-      <h2 data-lang="ru">Чем мы лучше</h2>
-      <h2 data-lang="en" style="display:none;">Why We're Better</h2>
-      <p data-lang="ru">
-        Список ваших преимуществ...
-      </p>
-      <p data-lang="en" style="display:none;">
-        Your advantage list...
-      </p>
-    </section>
-
-    <!-- Партнерство -->
-    <section id="partnership" data-aos="fade-up">
-      <h2 data-lang="ru">Партнерство</h2>
-      <h2 data-lang="en" style="display:none;">Partnership</h2>
-      <!-- блогерам, МЛМ, бизнес -->
-    </section>
-
-    <!-- О нас -->
-    <section id="about-us" data-aos="fade-up">
-      <h2 data-lang="ru">О нас</h2>
-      <h2 data-lang="en" style="display:none;">About Us</h2>
-      <p data-lang="ru">...</p>
-      <p data-lang="en" style="display:none;">...</p>
-    </section>
-
-    <!-- Полезные ссылки -->
-    <section id="useful-links" data-aos="fade-up">
-      <h2 data-lang="ru">Полезные ссылки</h2>
-      <h2 data-lang="en" style="display:none;">Useful Links</h2>
-      <div class="useful-links">
-        <!-- Ваши кнопки RU/EN -->
-      </div>
-    </section>
-
-    <!-- Закомментированная форма
-    <section id="contact-form" data-aos="fade-up">
-      ...
-    </section> 
-    -->
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <p data-lang="ru">Свяжитесь с нами: 
-      <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a>
-    </p>
-    <p data-lang="en" style="display:none;">Contact Us:
-      <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a>
-    </p>
-    <p data-lang="ru">© 2025 DynSteaking. Все права защищены.</p>
-    <p data-lang="en" style="display:none;">© 2025 DynSteaking. All rights reserved.</p>
-
-    <p data-lang="ru">Следите за нами в соцсетях:</p>
-    <p data-lang="en" style="display:none;">Follow us on social networks:</p>
-    <div class="social-links">
-      <a href="https://youtube.com/@plexeveonline..." class="button-link" target="_blank" data-lang="ru">YouTube</a>
-      <a href="https://youtube.com/@plexeveonline..." class="button-link" target="_blank" data-lang="en" style="display:none;">YouTube</a>
-      <a href="https://telegram.me/PLEXcrypto" class="button-link" target="_blank" data-lang="ru">Telegram</a>
-      <a href="https://telegram.me/PLEXcrypto" class="button-link" target="_blank" data-lang="en" style="display:none;">Telegram</a>
-    </div>
-  </footer>
+    
+    <!-- Основной контент -->
+    <main>
+        <!-- Секция Графика рынка -->
+        <section id="market-embed" data-aos="fade-up">
+            <h2 data-lang="ru">График рынка PLEX</h2>
+            <h2 data-lang="en" style="display: none;">PLEX Market Chart</h2>
+            <iframe loading="lazy" height="100%" width="100%" id="geckoterminal-embed" title="GeckoTerminal Embed" src="https://www.geckoterminal.com/bsc/pools/0xe8ceeb8f540720877fb85b6bb3b43cb761aba2be?embed=1&info=1&swaps=1&grayscale=0&light_chart=0" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
+            <a href="https://pancakeswap.finance/swap?outputCurrency=0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="ru">Купить PLEX</a>
+            <a href="https://pancakeswap.finance/swap?outputCurrency=0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="en" style="display: none;">Buy PLEX</a>
+        </section>
+        
+        <!-- Секция Как Это Работает -->
+        <section id="how-it-works" data-aos="fade-up">
+            <h2 data-lang="ru">Как это работает?</h2>
+            <h2 data-lang="en" style="display: none;">How It Works</h2>
+            <p data-lang="ru">Мы берем пользователя и смотрим на него: как на человека, у которого нет свободных денег в принципе. То есть мы понимаем, что пользователь — это простой человек, у которого: очень много работы, мало отдыха, нет времени, есть ипотека или иное кредитование, масса расходов на семью и т.д., и нет свободных серьёзных денег как таковых, или они есть, но вместе с тем они накапливались несколько лет и являются ценностью. То есть, иначе говоря, они ему достались слишком тяжёлой ценой, чтобы он мог их использовать для инвестирования.</p>
+            <p data-lang="en" style="display: none;">We look at the user as someone who essentially has no free money. We understand that the user is a simple person who has a lot of work, little rest, no time, a mortgage or other loans, many family expenses, etc., and has no significant free money, or if they do, it has been accumulated over several years and is valuable. In other words, it has come at too high a price for them to invest.</p>
+            <p data-lang="ru">Поэтому мы сделали для этого человека простой и прямой путь, который требует 1 минуту времени, но каждый день и требует от человека внимания: КОПИТЬ у себя, на своём кошельке, деньги по три доллара в день. За это пользователь получает от наших инвесторов каждый день вознаграждение в BnB и рост курса монеты PLEX прямо на своём кошельке.</p>
+            <p data-lang="en" style="display: none;">Therefore, we have created a simple and direct path for this person, which takes 1 minute and requires daily attention: BUY for yourself, on your own wallet, three dollars a day. In return, the user receives daily rewards in BnB from our investors and the PLEX coin price growth directly in their wallet.</p>
+            <p data-lang="ru">Через, например, 10 дней такой простой работы человек смотрит в свой кошелёк и видит, что он накопил в монете PLEX 30 долларов — это то, что он как бы вложил. Запомним это и теперь смотрим, что ему пришло в BnB за это время около 1-3 долларов, потому что он покупал монету PLEX каждый день на три доллара себе на свой личный кошелек.</p>
+            <p data-lang="en" style="display: none;">After, for example, 10 days of such simple work, the person looks into their wallet and sees that they have accumulated $30 in PLEX coins — this is what they have invested. We remember this and now we see that they have received about $1-3 in BnB over this time because they bought PLEX coins daily for three dollars into their personal wallet.</p>
+            <p data-lang="ru">Хорошо, теперь давайте посмотрим, а сколько сейчас стоят все те монеты PLEX, которые он покупал каждый день по 3 доллара, и таким образом внес 30 долларов — а его монеты PLEX сейчас стоят через десять дней уже 60 долларов.</p>
+            <p data-lang="en" style="display: none;">Now, let's see how much all those PLEX coins he bought daily for 3 dollars are worth now, and thus he has invested 30 dollars — his PLEX coins are now worth 60 dollars after ten days.</p>
+            <p data-lang="ru">Такая выгода позволяет ему через пару кварталов решить много вопросов и даже стать инвестором. Углубимся в вопрос: То есть из-за того, что вход по сути идёт не от: вложи как друг денег и побольше — а от накопи у себя на кошельке друг денег, сильно всё меняется в лучшую сторону.</p>
+            <p data-lang="en" style="display: none;">Such benefits allow him to solve many issues and even become an investor within a couple of quarters. Let's delve into the matter: Because the entry is not essentially about investing more money like a friend — but about accumulating money in your own wallet, everything changes significantly for the better.</p>
+            <p data-lang="ru">Благодаря тому, что покупать нужно не намного и сразу, а капельным методом по немного каждый день и главное эти деньги твои, их нет нужды кому-то отдавать, получается эффект копилки у себя на кошельке, и поэтому нас каждый день всё больше.</p>
+            <p data-lang="en" style="display: none;">Thanks to the fact that buying doesn't need to be much and all at once, but rather a drip method with a little each day, and most importantly, these funds are yours, there's no need to give money to anyone, creating a piggy bank effect in your own wallet, and therefore, we are growing every day.</p>
+            <p data-lang="ru">Вся информация ниже даст подробности, детали и глубокое понимание всего в целом, как оно работает.</p>
+            <p data-lang="en" style="display: none;">All the information below will provide details, specifics, and a deep understanding of how everything works as a whole.</p>
+            <a href="#advantages" class="button-link" data-lang="ru">Купить PLEX</a>
+            <a href="#advantages" class="button-link" data-lang="en" style="display: none;">Buy PLEX</a>
+        </section>
+        
+        <!-- Секция Почему Это Безопасно -->
+        <section id="safety" data-aos="fade-up">
+            <h2 data-lang="ru">Почему это безопасно?</h2>
+            <h2 data-lang="en" style="display: none;">Why Is It Safe?</h2>
+            <ol>
+                <li data-lang="ru">Монета PLEX на 90% в рынке. (нет никого, кто мог бы взять и обвалить весь курс в ноль целиком и полностью)</li>
+                <li data-lang="en" style="display: none;">PLEX coin has a 90% market presence. (There is no one who could take and crash the entire price to zero completely)</li>
+                <li data-lang="ru">Монету PLEX можно не только купить, но и продать в любой момент — на ней нет ограничений. (это убирает все вопросы безопасности актива и ставит его в ранг серьёзных активов)</li>
+                <li data-lang="en" style="display: none;">You can not only buy PLEX but also sell it at any time — there are no restrictions on it. (This eliminates all security concerns of the asset and ranks it among serious assets)</li>
+                <li data-lang="ru">Вся ваша монета хранится на вашем личном кошельке (что полностью убирает все вопросы доверия, монета PLEX ваша и лежит у вас на кошельке)</li>
+                <li data-lang="en" style="display: none;">All your coins are stored in your personal wallet (completely eliminating all trust issues, the PLEX coin is yours and resides in your wallet)</li>
+            </ol>
+            <a href="https://bscscan.com/address/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="ru">Подробнее на BSCScan</a>
+            <a href="https://bscscan.com/address/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="en" style="display: none;">More on BSCScan</a>
+        </section>
+        
+        <!-- Секция Почему Это Выгодно -->
+        <section id="advantages" data-aos="fade-up">
+            <h2 data-lang="ru">Почему это выгодно?</h2>
+            <h2 data-lang="en" style="display: none;">Why Is It Beneficial?</h2>
+            <p data-lang="ru">Логика ежедневных маленьких покупок позволяет нам постоянно расти:</p>
+            <p data-lang="en" style="display: none;">The logic of daily small purchases allows us to continuously grow:</p>
+            <ul>
+                <li data-lang="ru">В числе инвесторов. (больше денег в монете PLEX каждый день = выше курс + выше ежедневная награда в BnB = выше ваша прибыль и итого каждый день)</li>
+                <li data-lang="en" style="display: none;">Among investors. (more money in PLEX coins every day = higher price + higher daily reward in BnB = higher your profit and total daily earnings)</li>
+                <li data-lang="ru">В числе пользователей. (больше инвесторов + выше курс = выше прибыль каждого участника)</li>
+                <li data-lang="en" style="display: none;">Among users. (more investors + higher price = higher profit for each participant)</li>
+                <li data-lang="ru">В числе лидеров и блогеров. (больше народу знает про монету PLEX, а значит больше пользователей и инвесторов, а значит выше курс, а значит больше прибыль каждого участника)</li>
+                <li data-lang="en" style="display: none;">Among leaders and bloggers. (more people know about PLEX coin, meaning more users and investors, hence higher price, and therefore higher profit for each participant)</li>
+            </ul>
+            <p data-lang="ru">Не у каждого есть много денег, и не каждый готов рисковать. Поэтому убрав риски и сделав участие доступным с минимальных ежедневных сумм, мы заложили основу масштабирования.</p>
+            <p data-lang="en" style="display: none;">Not everyone has a lot of money, and not everyone is willing to take risks. Therefore, by removing risks and making participation accessible with minimal daily amounts, we have laid the foundation for scaling.</p>
+            <a href="#perspective" class="button-link" data-lang="ru">Купить PLEX</a>
+            <a href="#perspective" class="button-link" data-lang="en" style="display: none;">Buy PLEX</a>
+        </section>
+        
+        <!-- Секция Почему Это Перспективно -->
+        <section id="perspective" data-aos="fade-up">
+            <h2 data-lang="ru">Почему это перспективно?</h2>
+            <h2 data-lang="en" style="display: none;">Why Is It Promising?</h2>
+            <p data-lang="ru">У нас уже есть платформа, которая постоянно потребляет монету и уже работает. Это само по себе гарантирует рост.</p>
+            <p data-lang="en" style="display: none;">We already have a platform that constantly consumes the coin and is already operational. This in itself guarantees growth.</p>
+            <ul>
+                <li data-lang="ru">У нас есть система DynSteaking, которая, убрав риски, позволяет участвовать пользователю даже от минимальных сумм. Это обеспечивает стабильное развитие и рост цены PLEX.</li>
+                <li data-lang="en" style="display: none;">We have the DynSteaking system, which, by removing risks, allows users to participate even with minimal amounts. This ensures stable development and growth of PLEX price.</li>
+                <li data-lang="ru">У нас есть платформа Best Trade, которая уже потребляет монету PLEX.</li>
+                <li data-lang="en" style="display: none;">We have the Best Trade platform, which already consumes PLEX coins.</li>
+                <li data-lang="ru">У нас есть в стадии тестирования два сервиса Genesis 2 и Genesis 3, которые также потребляют монету PLEX как плату за доступ к платформе.</li>
+                <li data-lang="en" style="display: none;">We are testing two services, Genesis 2 and Genesis 3, which also consume PLEX coins as a fee for access to the platform.</li>
+                <li data-lang="ru">У нас есть метод подключения любого бизнеса к монете PLEX для увеличения циркуляции монеты в рынке.</li>
+                <li data-lang="en" style="display: none;">We have a method to connect any business to the PLEX coin to increase its circulation in the market.</li>
+            </ul>
+            <p data-lang="ru">Мы соединили усилия двух мощных направлений на одной монете уже сейчас, чтобы работая с PLEX, заработал гарантированно каждый. А чтобы каждый заработал много, по-настоящему много, мы заложили ещё несколько возможностей к масштабированию.</p>
+            <p data-lang="en" style="display: none;">We have combined the efforts of two powerful directions on one coin already, so that by working with PLEX, everyone earns guaranteed. And to ensure that everyone earns a lot, truly a lot, we have laid out several more opportunities for scaling.</p>
+            <a href="#how-it-works" class="button-link" data-lang="ru">Купить PLEX</a>
+            <a href="#how-it-works" class="button-link" data-lang="en" style="display: none;">Buy PLEX</a>
+        </section>
+        
+        <!-- Секция Партнерство -->
+        <section id="partnership" data-aos="fade-up">
+            <h2 data-lang="ru">Партнерство</h2>
+            <h2 data-lang="en" style="display: none;">Partnership</h2>
+            
+            <!-- Подраздел "Блогерам" -->
+            <div class="partnership-subsection">
+                <h3 data-lang="ru">Блогерам</h3>
+                <h3 data-lang="en" style="display: none;">For Bloggers</h3>
+                <p data-lang="ru">Если вы блогер и хотите начать с нами работать на выгодных условиях для себя, снимите честный обзорный материал о монете PLEX. Как только этот материал наберет 1000 реальных просмотров, пришлите нам письмо на единую рабочую почту. После оценки вашего материала и ваших возможностей нашей рекламной командой мы отправим вам предложение о сотрудничестве. Помните, мы не работаем на разовой основе, мы ценим долгосрочное сотрудничество.</p>
+                <p data-lang="en" style="display: none;">If you are a blogger and want to start working with us on favorable terms for yourself, create an honest review of the PLEX coin. Once this material reaches 1000 real views, send us an email to our single work email. After evaluating your material and your capabilities, our advertising team will send you a cooperation proposal. Remember, we do not work on a one-time basis, we value long-term cooperation.</p>
+                <p data-lang="ru">Email: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+                <p data-lang="en" style="display: none;">Email: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+            </div>
+            
+            <!-- Подраздел "Сетевым Лидерам МЛМ" -->
+            <div class="partnership-subsection">
+                <h3 data-lang="ru">Сетевым Лидерам МЛМ</h3>
+                <h3 data-lang="en" style="display: none;">For MLM Leaders</h3>
+                <p data-lang="ru">Дамы и господа, уважая ваше время и опыт, мы создали не только мощную партнерскую программу, которая каждому из вас приносит три вида дохода, но также мы рассматриваем формат персонального сотрудничества. Все, что от вас требуется для начала сотрудничества — кратко описать свой опыт и свои возможности нашему менеджеру на единую рабочую почту, и наша команда оценит ваши возможности и выйдет к вам на связь с предложением о персональном сотрудничестве.</p>
+                <p data-lang="en" style="display: none;">Ladies and Gentlemen, respecting your time and experience, we have created not only a powerful partnership program that brings three types of income to each of you but also consider a format of personal cooperation. All that is required from you to start cooperation is to briefly describe your experience and capabilities to our manager at our single work email, and our team will evaluate your capabilities and reach out to you with a personal cooperation proposal.</p>
+                <p data-lang="ru">Email: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+                <p data-lang="en" style="display: none;">Email: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+            </div>
+            
+            <!-- Подраздел "Бизнес и коллаборация" -->
+            <div class="partnership-subsection">
+                <h3 data-lang="ru">Бизнес и коллаборация</h3>
+                <h3 data-lang="en" style="display: none;">Business and Collaboration</h3>
+                <p data-lang="ru">Монета PLEX в вашем бизнесе поднимает вашу ежедневную прибыль примерно на треть, поднимает сразу, никаких вложений со стороны бизнеса не нужно. Техническое подключение мы способны осуществить самостоятельно или предоставить документацию вашему специалисту. Для подключения вашего бизнеса к экосистеме PLEX необходимо отправить письмо на нашу единую рабочую почту, в письме указать адрес сайта вашего бизнеса или бота из соцсетей, в котором вы работаете, и вкратце описать принцип работы вашего бизнеса. Как только мы изучим вашу заявку, наша коммерческая команда свяжется с вами и подключит ваш бизнес к потоку свежей прибыли.</p>
+                <p data-lang="en" style="display: none;">The PLEX coin increases your daily profit in your business by about a third immediately, with no investment required from the business side. We can handle the technical integration ourselves or provide documentation to your specialist. To connect your business to the PLEX ecosystem, you need to send an email to our single work email, specifying the address of your business website or the bot in social networks you operate in, and briefly describe the principle of your business operations. Once we review your application, our commercial team will contact you and connect your business to the stream of fresh profit.</p>
+                <p data-lang="ru">Email: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+                <p data-lang="en" style="display: none;">Email: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+            </div>
+        </section>
+        
+        <!-- Новый раздел "О нас" -->
+        <section id="about-us" data-aos="fade-up">
+            <h2 data-lang="ru">О нас</h2>
+            <h2 data-lang="en" style="display: none;">About Us</h2>
+            <p data-lang="ru">
+                Мы создали DynSteaking как инновационную платформу, которая обеспечивает пассивный доход без необходимости крупных вложений. Наше решение напоминает копилку или денежную машину, встроенную прямо в кошелек каждого пользователя. Это уникальное предложение выделяет нас среди других компаний в 2025 году, делая нашу партнерскую программу лучшей на рынке.
+            </p>
+            <p data-lang="en" style="display: none;">
+                We created DynSteaking as an innovative platform that provides passive income without the need for significant investments. Our solution resembles a piggy bank or money machine embedded directly into each user's wallet. This unique offering sets us apart from other companies in 2025, making our partnership program the best on the market.
+            </p>
+            <p data-lang="ru">
+                Мы гордимся тем, что являемся лучшей сетевой компанией, использующей Plex, Плекс, и помогающей каждому зарабатывать. Честность, открытость, доброта и огромный ежедневный доход — вот залог нашего успеха. Присоединяйтесь к нам и начните свой путь к финансовой свободе уже сегодня!
+            </p>
+            <p data-lang="en" style="display: none;">
+                We take pride in being the best network company using Plex, Плекс, and helping everyone earn. Honesty, openness, kindness, and substantial daily income are the keys to our success. Join us and start your journey to financial freedom today!
+            </p>
+        </section>
+        
+        <!-- Секция Полезных Ссылок -->
+        <section id="useful-links" data-aos="fade-up">
+            <h2 data-lang="ru">Полезные ссылки</h2>
+            <h2 data-lang="en" style="display: none;">Useful Links</h2>
+            <div class="useful-links">
+                <a href="https://t.me/InvestBookingBot?start=1637510725" class="button-link" data-lang="ru">Подключиться к боту раннего бронирования</a>
+                <a href="https://t.me/InvestBookingBot?start=1637510725" class="button-link" data-lang="en" style="display: none;">Connect to Early Booking Bot</a>
+                <a href="https://bscscan.com/address/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="ru">Адрес смарт-контракта PLEX</a>
+                <a href="https://bscscan.com/address/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="en" style="display: none;">PLEX Smart Contract Address</a>
+                <a href="https://pancakeswap.finance/swap?outputCurrency=0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="ru">DEX для покупки PLEX</a>
+                <a href="https://pancakeswap.finance/swap?outputCurrency=0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="en" style="display: none;">DEX to Buy PLEX</a>
+                <a href="https://dexrabbit.com/bsc/pair/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f/0x55d398326f99059ff775485246999027b3197955" class="button-link" data-lang="ru">Мониторинг ликвидности</a>
+                <a href="https://dexrabbit.com/bsc/pair/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f/0x55d398326f99059ff775485246999027b3197955" class="button-link" data-lang="en" style="display: none;">Liquidity Monitoring</a>
+                <a href="https://coinbrain.com/coins/bnb-0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="ru">Аналитика токена</a>
+                <a href="https://coinbrain.com/coins/bnb-0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="en" style="display: none;">Token Analytics</a>
+                <a href="https://apespace.io/honeypot/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="ru">Проверка безопасности</a>
+                <a href="https://apespace.io/honeypot/0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="en" style="display: none;">Security Check</a>
+                <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link" data-lang="ru">Задать вопросы</a>
+                <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link" data-lang="en" style="display: none;">Ask Questions</a>
+            </div>
+        </section>
+        
+        <!-- Секция Форма обратной связи (закомментирована) -->
+        <!--
+        <section id="contact-form" data-aos="fade-up">
+            <h2 data-lang="ru">Свяжитесь с нами</h2>
+            <h2 data-lang="en" style="display: none;">Contact Us</h2>
+            <form action="mailto:plex.eve.onlaine@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Ваше имя" data-lang="ru" required>
+                <input type="text" name="name" placeholder="Your Name" data-lang="en" style="display: none;" required>
+                <input type="email" name="email" placeholder="Ваш email" data-lang="ru" required>
+                <input type="email" name="email" placeholder="Your Email" data-lang="en" style="display: none;" required>
+                <textarea name="message" placeholder="Ваше сообщение" data-lang="ru" required></textarea>
+                <textarea name="message" placeholder="Your Message" data-lang="en" style="display: none;" required></textarea>
+                <button type="submit" class="button-link" data-lang="ru">Отправить</button>
+                <button type="submit" class="button-link" data-lang="en" style="display: none;">Send</button>
+            </form>
+        </section>
+        -->
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p data-lang="ru">Свяжитесь с нами: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+        <p data-lang="en" style="display: none;">Contact Us: <a href="mailto:plex.eve.onlaine@gmail.com" class="button-link">plex.eve.onlaine@gmail.com</a></p>
+        <p data-lang="ru">© 2025 DynSteaking. Все права защищены.</p>
+        <p data-lang="en" style="display: none;">© 2025 DynSteaking. All rights reserved.</p>
+        <p data-lang="ru">Следите за нами в социальных сетях:</p>
+        <p data-lang="en" style="display: none;">Follow us on social networks:</p>
+        <div class="social-links">
+            <a href="https://youtube.com/@plexeveonline?feature=shared" class="button-link" target="_blank" rel="noopener noreferrer" data-lang="ru">YouTube</a>
+            <a href="https://youtube.com/@plexeveonline?feature=shared" class="button-link" target="_blank" rel="noopener noreferrer" data-lang="en" style="display: none;">YouTube</a>
+            <a href="https://telegram.me/PLEXcrypto" class="button-link" target="_blank" rel="noopener noreferrer" data-lang="ru">Telegram</a>
+            <a href="https://telegram.me/PLEXcrypto" class="button-link" target="_blank" rel="noopener noreferrer" data-lang="en" style="display: none;">Telegram</a>
+        </div>
+    </footer>
 </body>
 </html>
