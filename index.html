@@ -148,6 +148,7 @@
             background: var(--background-image), linear-gradient(135deg, #4E342E 0%, #3E2723 100%);
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
@@ -375,12 +376,15 @@
         #market-embed {
             text-align: center;
             margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         #market-embed iframe {
             width: 100%;
-            max-width: 100%; /* Обеспечивает, что iframe не выходит за пределы контейнера */
-            height: 500px;
+            max-width: 800px; /* Ограничение ширины iframe */
+            height: 500px; /* Фиксированная высота для предотвращения перекрытия */
             border: none;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
@@ -393,7 +397,7 @@
         
         #market-embed .button-link {
             margin-top: 20px;
-            max-width: 300px; /* Ограничение ширины для предотвращения выезда за экран */
+            max-width: 300px; /* Ограничение ширины */
             word-wrap: break-word; /* Позволяет переносить длинные слова */
         }
         
@@ -440,7 +444,7 @@
             margin-top: 10px;
             display: inline-block;
             max-width: 300px; /* Ограничение ширины */
-            word-wrap: break-word;
+            word-wrap: break-word; /* Позволяет переносить длинные слова */
         }
         
         /* Секция Полезных Ссылок */
@@ -472,7 +476,6 @@
         }
         
         #useful-links .useful-links a.button-link {
-            /* Стиль уже унаследован от .button-link */
             max-width: 300px; /* Ограничение ширины */
             word-wrap: break-word; /* Позволяет переносить длинные слова */
         }
@@ -510,6 +513,11 @@
             margin-left: 20px;
             color: #F5F5F5;
             transition: font-size var(--transition-speed);
+        }
+        
+        #comparison ul li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
         }
         
         /* Новый раздел "О нас" */
@@ -581,9 +589,8 @@
         }
         
         .social-links a.button-link {
-            /* Стиль уже унаследован от .button-link */
             max-width: 150px; /* Ограничение ширины */
-            word-wrap: break-word;
+            word-wrap: break-word; /* Позволяет переносить длинные слова */
         }
         
         .social-links a.button-link:hover {
@@ -761,7 +768,7 @@
             });
 
             // Собираем все кнопки с классом button-link в навигации, футере, разделе "market-embed", "useful-links", "partnership", "comparison" и "about-us"
-            const links = document.querySelectorAll('nav ul li a.button-link, footer a.button-link, #market-embed .button-link, #useful-links .button-link, #partnership .button-link, #comparison .button-link, #about-us .button-link');
+            const links = document.querySelectorAll('nav ul li a.button-link, footer a.button-link, #market-embed .button-link, #useful-links .useful-links a.button-link, #partnership .button-link, #comparison .button-link, #about-us .button-link');
 
             for (const link of links) {
                 link.addEventListener('click', function(e) {
@@ -886,7 +893,7 @@
         <section id="market-embed" data-aos="fade-up">
             <h2 data-lang="ru">График рынка PLEX</h2>
             <h2 data-lang="en" style="display: none;">PLEX Market Chart</h2>
-            <iframe loading="lazy" height="100%" width="100%" id="geckoterminal-embed" title="GeckoTerminal Embed" src="https://www.geckoterminal.com/bsc/pools/0xe8ceeb8f540720877fb85b6bb3b43cb761aba2be?embed=1&info=1&swaps=1&grayscale=0&light_chart=0" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
+            <iframe loading="lazy" height="500px" width="100%" id="geckoterminal-embed" title="GeckoTerminal Embed" src="https://www.geckoterminal.com/bsc/pools/0xe8ceeb8f540720877fb85b6bb3b43cb761aba2be?embed=1&info=1&swaps=1&grayscale=0&light_chart=0" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
             <a href="https://pancakeswap.finance/swap?outputCurrency=0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="ru">Купить PLEX</a>
             <a href="https://pancakeswap.finance/swap?outputCurrency=0x7ba98610531ad480F71F7d43b7aA26882Cb6d32f" class="button-link" data-lang="en" style="display: none;">Buy PLEX</a>
         </section>
