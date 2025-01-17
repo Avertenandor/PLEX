@@ -193,12 +193,15 @@
             max-width: 800px; /* Ограничение ширины для лучшего центрирования */
             transition: padding var(--transition-speed);
             scroll-margin-top: calc(var(--header-height) + 20px); /* Предотвращает перекрытие при якорных ссылках */
+
+            /* Убрал margin-top: 7%, вместо этого обычное центрирование */
+            margin: 80px auto; /* Горизонтальное центрирование + отступ сверху */
+
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 20px;
-            /* Удален margin-top: 7%; */
         }
         
         #hero h1 {
@@ -637,13 +640,12 @@
             const burger = document.querySelector('.burger');
             const navLinks = document.querySelector('.nav-links');
 
-            burger.addEventListener('click', (e) => {
-                e.stopPropagation(); // Предотвращает распространение события клика
+            burger.addEventListener('click', () => {
                 burger.classList.toggle('active');
                 navLinks.classList.toggle('active');
             });
 
-            // Закрытие меню при клике вне его области
+            // Закрытие меню при клике вне его области (если нужно)
             document.addEventListener('click', function(event) {
                 if (!burger.contains(event.target) && !navLinks.contains(event.target)) {
                     if (navLinks.classList.contains('active')) {
@@ -654,7 +656,15 @@
             });
 
             // Плавная прокрутка при клике на ссылки
-            const links = document.querySelectorAll('nav ul li a.button-link, footer a.button-link, #market-embed .button-link, #useful-links .button-link, #partnership .button-link, #comparison .button-link, #about-us .button-link');
+            const links = document.querySelectorAll(
+                'nav ul li a.button-link,' +
+                ' footer a.button-link,' +
+                ' #market-embed .button-link,' +
+                ' #useful-links .button-link,' +
+                ' #partnership .button-link,' +
+                ' #comparison .button-link,' +
+                ' #about-us .button-link'
+            );
 
             links.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -672,7 +682,7 @@
                                 behavior: 'smooth'
                             });
 
-                            // Закрытие бургер-меню после выбора
+                            // Закрытие бургер-меню после выбора, если открыто
                             if (navLinks.classList.contains('active')) {
                                 navLinks.classList.remove('active');
                                 burger.classList.remove('active');
