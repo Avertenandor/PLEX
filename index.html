@@ -197,6 +197,7 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
+            margin-top: 7%; /* Опускание на 7% */
         }
         
         #hero h1 {
@@ -367,15 +368,16 @@
         }
         
         #useful-links .useful-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            transition: gap var(--transition-speed);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
         }
         
         #useful-links .useful-links a.button-link {
-            max-width: 300px; /* Ограничение ширины */
+            justify-self: center;
+            max-width: 250px; /* Ограничение ширины */
             word-wrap: break-word; /* Позволяет переносить длинные слова */
         }
         
@@ -513,7 +515,10 @@
             }
             
             .nav-links.active {
-                display: flex;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 20px;
             }
             
             .burger.active div:nth-child(1) {
