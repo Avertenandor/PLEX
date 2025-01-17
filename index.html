@@ -16,25 +16,25 @@
     <meta property="og:image" content="https://avertenandor.github.io/фон/logo.png">
     <meta property="og:url" content="https://avertenandor.github.io">
     <meta property="og:type" content="website">
-
+    
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DynSteaking — Честный путь к прибыли">
     <meta name="twitter:description" content="Управляйте криптовалютой, обеспечивайте пассивный доход и используйте лучшие реферальные программы с DynSteaking в 2025 году.">
     <meta name="twitter:image" content="https://avertenandor.github.io/фон/logo.png">
-
+    
     <!-- Favicon и иконки -->
     <link rel="apple-touch-icon" sizes="180x180" href="фон/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="фон/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="фон/favicon-16x16.png">
     <link rel="manifest" href="фон/site.webmanifest">
-
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+    
     <!-- AOS Library CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
+    
     <!-- Основной CSS -->
     <style>
         :root {
@@ -581,19 +581,15 @@
                 padding: 20px;
             }
             
+            /* Расположение кнопок по две в ряд в мобильной версии */
+            .nav-links.active {
+                grid-template-columns: repeat(2, 1fr);
+                justify-items: center;
+            }
+            
             /* Уменьшение высоты iframe на мобильных */
             #market-embed iframe {
                 height: 300px; /* Уменьшенная высота на мобильных */
-            }
-            
-            /* Изменение сетки навигационных ссылок */
-            .nav-links.active {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            /* Сетка для полезных ссылок */
-            #useful-links .useful-links {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -947,4 +943,5 @@
             <a href="https://telegram.me/PLEXcrypto" class="button-link" target="_blank" rel="noopener noreferrer" data-lang="en" style="display: none;">Telegram</a>
         </div>
     </footer>
-</body
+</body>
+</html>
